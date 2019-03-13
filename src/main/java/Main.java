@@ -32,11 +32,11 @@ public class Main {
         var hashedPasswords = Files.lines(Path.of(file))
                 // 2
                 .map(DigestUtils::sha1Hex)
-                // 3
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
 
         var hashedShortenedPasswords = hashedPasswords.stream()
+                // 3
                 .map(password -> password.substring(0, passwordCharacterLimit))
                 .collect(Collectors.toList());
 
@@ -45,19 +45,16 @@ public class Main {
                 .map(Main::haveIBeenPwned)
                 .flatMap(Optional::stream)
                 .flatMap(List::stream)
-                .map(pwned ->
-                    hashedShortenedPasswords.stream()
-                            .map(hashed -> hashed.concat(pwned))
-                            .collect(Collectors.toList())
+                .flatMap(pwned -> hashedShortenedPasswords.stream()
+                        .map(hashed -> hashed.concat(pwned))
                 )
-                .flatMap(List::stream)
                 .collect(Collectors.toList());
 
 
         // Have I been pwned?
         pwnedPasswords.stream()
                 // 5.
-                .filter(e -> hashedPasswords.contains(e.substring(0, e.indexOf(":"))))
+                .filter(pwnedPassword -> hashedPasswords.contains(pwnedPassword.substring(0, pwnedPassword.indexOf(":"))))
                 // 6.
                 .forEach(System.out::println);
 
