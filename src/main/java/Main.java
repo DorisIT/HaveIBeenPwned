@@ -1,10 +1,12 @@
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -20,7 +22,7 @@ public class Main {
 
         // 1
         final String file = args[0];
-        var hashedPasswords = Files.lines(Path.of(file))
+        var hashedPasswords = readLines(file).stream()
                 // 2
                 .map(DigestUtils::sha1Hex)
                 .map(String::toUpperCase)
@@ -40,6 +42,15 @@ public class Main {
                 .filter(pwnedPassword -> hashedPasswords.contains(pwnedPassword.substring(0, pwnedPassword.indexOf(":"))))
                 // 6.
                 .forEach(System.out::println);
+    }
+
+    // Method for auto-closing IO resources
+    public static List<String> readLines(String filename) {
+        try(Stream<String> lines = Files.lines(Path.of(filename))) {
+            return lines.collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
 
