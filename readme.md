@@ -1,4 +1,4 @@
-A simple application for checking if your password(s) have been compromised online## A simple application for checking if your password(s) have been compromised online
+## A simple application for checking if your password(s) have been compromised online
 
 [haveibeenpwned](https://haveibeenpwned.com) recently added the ability to check if your password has been part of any leaks that has occured. If your password has been compromised, strongly consider changing your password asap
 
@@ -28,7 +28,7 @@ To run the program, you will first need a file with all of the passwords you wan
 Run the program with the follwing command
 
 ```
-java -jar path/to/jar/HaveIBeenPwned.jar path/to/passwords/password.txt
+java -jar path/to/jar/HaveIBeenPwned.jar path/to/passwords/passwords.txt
 ```
 
 ### Output
