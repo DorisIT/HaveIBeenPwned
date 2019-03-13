@@ -28,8 +28,8 @@ public class Main {
         // 6. If there's a match, print how many times the password has leaked
 
         // 1
-        //var hashedPasswords = Files.lines(Path.of("passwords.txt"))
-        var hashedPasswords = Files.lines(Path.of("passwords.txt"))
+        final String file = args[0];
+        var hashedPasswords = Files.lines(Path.of(file))
                 // 2
                 .map(DigestUtils::sha1Hex)
                 // 3
