@@ -34,7 +34,7 @@ To check several files at a time, just pass them as seperate command line argume
 
 
 ### Output
-If your password has been compromised, the program will generate an output with your password(s) hashed in SHA-1 along with the number of times your password has been compromised seperated by a : (colon)
+If your password has been compromised, the program will generate an output with your password(s) along with the number of times your password has been compromised seperated by a : (colon)
 #### Output from the [example file](#run) above
 ```
 java -jar target/HaveIBeenPwned.jar passwords.txt 
