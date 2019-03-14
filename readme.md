@@ -30,6 +30,8 @@ Run the program with the follwing command
 ```
 java -jar path/to/jar/HaveIBeenPwned.jar path/to/passwords/passwords.txt
 ```
+To check several files at a time, just pass them as seperate command line arguments
+
 
 ### Output
 If your password has been compromised, the program will generate an output with your password(s) hashed in SHA-1 along with the number of times your password has been compromised seperated by a : (colon)
@@ -37,6 +39,7 @@ If your password has been compromised, the program will generate an output with 
 ```
 java -jar target/HaveIBeenPwned.jar passwords.txt 
 
+Checking passwords from passwords.txt
 70CCD9007338D6D81DD3B6271621B9CF9A97EA00:111658
 B2E98AD6F6EB8508DD6A14CFA704BAD7F05F6FB1:21961
 BFD3617727EAB0E800E62A776C76381DEFBC4145:114
