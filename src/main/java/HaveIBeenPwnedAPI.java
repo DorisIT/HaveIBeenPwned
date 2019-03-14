@@ -12,9 +12,10 @@ public class HaveIBeenPwnedAPI implements API {
             .version(HttpClient.Version.HTTP_1_1)
             .build();
 
+    private final String baseURL = "https://api.pwnedpasswords.com/range/";
+
     public Optional<List<String>> haveIBeenPwned(String passwordHash) {
         // We only need to send the first 5 characters of the hashed password to HaveIBeenPwned's API
-        final String baseURL = "https://api.pwnedpasswords.com/range/";
         final int PASSWORDCHARACTERLIMIT = 5;
         // 3
         var shortPasswordHash = passwordHash.substring(0, PASSWORDCHARACTERLIMIT);
