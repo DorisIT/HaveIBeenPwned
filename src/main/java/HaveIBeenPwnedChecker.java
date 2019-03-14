@@ -19,7 +19,6 @@ public class HaveIBeenPwnedChecker {
 
         // Have I been pwned?
         return pwnedPasswords.stream()
-                // Bara intresserad av pwnade losenord
                 .filter(pwnedPassword -> isPwned(hashedPasswords.keySet(), pwnedPassword))
                 .map(pwnedPassword -> prettify(hashedPasswords.get(pwnedToHash(pwnedPassword)), pwnedPassword))
                 .collect(Collectors.toList());
@@ -37,7 +36,6 @@ public class HaveIBeenPwnedChecker {
                 .flatMap(Optional::stream)
                 .flatMap(List::stream)
                 // 5.
-                //.filter(pwnedPassword -> hashedPasswords.contains(pwnedPassword.substring(0, pwnedPassword.indexOf(":"))))
                 .filter(pwnedPassword -> isPwned(hashedPasswords, pwnedPassword))
                 .collect(Collectors.toList());
     }
