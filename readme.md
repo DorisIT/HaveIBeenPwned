@@ -40,8 +40,8 @@ If your password has been compromised, the program will generate an output with 
 java -jar target/HaveIBeenPwned.jar passwords.txt 
 
 Checking passwords from passwords.txt
-70CCD9007338D6D81DD3B6271621B9CF9A97EA00:111658
-B2E98AD6F6EB8508DD6A14CFA704BAD7F05F6FB1:21961
-BFD3617727EAB0E800E62A776C76381DEFBC4145:114
+Password1:111658
+Password123:21961
+correcthorsebatterystaple:114
 
 ```
