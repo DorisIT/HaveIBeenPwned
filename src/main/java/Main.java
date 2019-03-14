@@ -24,7 +24,7 @@ public class Main {
     }
 
     public static void hasThisFileBeenPwned(String file) {
-        System.out.println("Checking passwords from " + file);
+        prettyPrint(file);
 
         List<String> passwords = readLines(file);
 
@@ -40,6 +40,15 @@ public class Main {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    public static void prettyPrint(String file) {
+        System.out.println();
+        System.out.println("Checking passwords from " + file);
+        String customDelimiter = Stream.iterate("-", n -> "-")
+                .limit(file.length())
+                .collect(Collectors.joining());
+        System.out.println("------------------------" + customDelimiter);
     }
 
 }
