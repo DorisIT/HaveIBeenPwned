@@ -1,6 +1,6 @@
 ## A simple application for checking if your password(s) have been compromised online
 
-[haveibeenpwned](https://haveibeenpwned.com) recently added the ability to check if your password has been part of any leaks that has occured. If your password has been compromised, strongly consider changing your password asap
+[haveibeenpwned](https://haveibeenpwned.com) recently added the ability to check if your password has been part of any leaks that has occured. This is accomplished by sending 5 characters of your password hashed with [SHA-1](https://en.wikipedia.org/wiki/SHA-1) and comparing the full hash of your password against all potential matches that was returned from the API. If your password has been compromised, strongly consider changing your password asap
 
 ## How-to
 ### Java version
@@ -34,7 +34,7 @@ To check several files at a time, just pass them as seperate command line argume
 
 
 ### Output
-If your password has been compromised, the program will generate an output with your password(s) along with the number of times your password has been compromised seperated by a : (colon)
+If your password has been compromised, the program will generate an output with your password(s) along with the number of times your password has been compromised seperated by a : (colon).
 #### Output from the [example file](#run) above
 ```
 java -jar target/HaveIBeenPwned.jar passwords.txt 
