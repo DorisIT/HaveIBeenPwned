@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -13,7 +14,7 @@ public class Main {
 
     private static final API api = new HaveIBeenPwnedAPI();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // 1. Read password from file
         // 2. Hash passwords with SHA-1
         // 3. Take only the first 5 hexadecimal characters of each password -> API implementation detail
@@ -22,7 +23,15 @@ public class Main {
         // 6. If there's a match, print how many times the password has leaked
 
         // 1
-        final String file = args[0];
+
+        // Read all the files and check if any passwords have been pwned
+        Arrays.stream(args)
+                .forEach(Main::haveIBeenPwned);
+    }
+
+    public static void haveIBeenPwned(String file) {
+        System.out.println("Checking passwords from " + file);
+
         List<String> hashedPasswords = readLines(file).stream()
                 // 2
                 .map(DigestUtils::sha1Hex)
@@ -32,7 +41,7 @@ public class Main {
         Map<String, Optional<List<String>>> pwnedPasswords = hashedPasswords.stream()
                 // 4
                 .collect(Collectors.toMap(Object::toString,
-                                            api::haveIBeenPwned));
+                        api::haveIBeenPwned));
 
         // Have I been pwned?
         hashedPasswords.stream()
