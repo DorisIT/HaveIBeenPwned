@@ -27,7 +27,7 @@ public class Main {
         List<String> passwords = readLines(file);
 
         // 6
-        HaveIBeenPwnedChecker.haveIBeenPwned(passwords).stream()
+        HaveIBeenPwnedChecker.haveIBeenPwnedPretty(passwords).stream()
                 .forEach(System.out::println);
     }
 
