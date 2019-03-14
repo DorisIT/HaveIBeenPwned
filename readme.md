@@ -40,6 +40,7 @@ If your password has been compromised, the program will generate an output with 
 java -jar target/HaveIBeenPwned.jar passwords.txt 
 
 Checking passwords from passwords.txt
+-------------------------------------
 Password1:111658
 Password123:21961
 correcthorsebatterystaple:114
