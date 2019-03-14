@@ -43,12 +43,13 @@ public class Main {
     }
 
     public static void prettyPrint(String file) {
+        final String message = "Checking passwords from ";
         System.out.println();
-        System.out.println("Checking passwords from " + file);
+        System.out.println(message + file);
         String customDelimiter = Stream.iterate("-", n -> "-")
-                .limit(file.length())
+                .limit(message.length() + file.length())
                 .collect(Collectors.joining());
-        System.out.println("------------------------" + customDelimiter);
+        System.out.println(customDelimiter);
     }
 
 }
