@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 
 public class Main {
 
+    private static HaveIBeenPwnedChecker checker = new HaveIBeenPwnedChecker();
+
     public static void main(String[] args) {
         // 1. Read password from file
         // 2. Hash passwords with SHA-1
@@ -27,7 +29,7 @@ public class Main {
         List<String> passwords = readLines(file);
 
         // 6
-        HaveIBeenPwnedChecker.haveIBeenPwnedPretty(passwords).stream()
+        checker.haveIBeenPwnedPretty(passwords).stream()
                 .forEach(System.out::println);
     }
 
