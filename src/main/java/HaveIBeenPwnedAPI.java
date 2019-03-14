@@ -18,8 +18,8 @@ public class HaveIBeenPwnedAPI implements API {
         // We only need to send the first 5 characters of the hashed password to HaveIBeenPwned's API
         final int PASSWORDCHARACTERLIMIT = 5;
         // 3
-        var shortPasswordHash = passwordHash.substring(0, PASSWORDCHARACTERLIMIT);
-        var apiURL = baseURL.concat(shortPasswordHash);
+        String shortPasswordHash = passwordHash.substring(0, PASSWORDCHARACTERLIMIT);
+        String apiURL = baseURL.concat(shortPasswordHash);
 
         // Make request to API
         HttpRequest request = HttpRequest.newBuilder()
