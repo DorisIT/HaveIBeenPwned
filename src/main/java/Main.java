@@ -1,18 +1,12 @@
-import org.apache.commons.codec.digest.DigestUtils;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
-
-    private static final API api = new HaveIBeenPwnedAPI();
 
     public static void main(String[] args) {
         // 1. Read password from file
@@ -23,45 +17,27 @@ public class Main {
         // 6. If there's a match, print how many times the password has leaked
 
         // 1
-
-        // Read all the files and check if any passwords have been pwned
         Arrays.stream(args)
-                .forEach(Main::haveIBeenPwned);
+                .forEach(Main::hasThisFileBeenPwned);
     }
 
-    public static void haveIBeenPwned(String file) {
+    public static void hasThisFileBeenPwned(String file) {
         System.out.println("Checking passwords from " + file);
 
-        List<String> hashedPasswords = readLines(file).stream()
-                // 2
-                .map(DigestUtils::sha1Hex)
-                .map(String::toUpperCase)
-                .collect(Collectors.toList());
+        List<String> passwords = readLines(file);
 
-        Map<String, Optional<List<String>>> pwnedPasswords = hashedPasswords.stream()
-                // 4
-                .collect(Collectors.toMap(Object::toString,
-                        api::haveIBeenPwned));
-
-        // Have I been pwned?
-        hashedPasswords.stream()
-                .map(pwnedPasswords::get)
-                .flatMap(Optional::stream)
-                .flatMap(List::stream)
-                // 5.
-                .filter(pwnedPassword -> hashedPasswords.contains(pwnedPassword.substring(0, pwnedPassword.indexOf(":"))))
-                // 6.
+        // 6
+        HaveIBeenPwnedChecker.haveIBeenPwned(passwords).stream()
                 .forEach(System.out::println);
     }
 
     // Method for auto-closing IO resources
     public static List<String> readLines(String filename) {
-        try(Stream<String> lines = Files.lines(Path.of(filename))) {
+        try (Stream<String> lines = Files.lines(Path.of(filename))) {
             return lines.collect(Collectors.toList());
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
-
 
 }
