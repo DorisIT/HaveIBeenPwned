@@ -46,7 +46,7 @@ public class Main {
         final String message = "Checking passwords from ";
         System.out.println();
         System.out.println(message + file);
-        String customDelimiter = Stream.iterate("-", n -> "-")
+        String customDelimiter = Stream.iterate("-", accumulator -> "-")
                 .limit(message.length() + file.length())
                 .collect(Collectors.joining());
         System.out.println(customDelimiter);
